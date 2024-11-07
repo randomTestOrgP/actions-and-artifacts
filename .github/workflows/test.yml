@@ -1,0 +1,22 @@
+name: Test actions and artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch_and_upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download file
+        run: curl -o sample-file.txt https://www.example.com/sample-file.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-file
+          path: sample-file.txt
+          retention-days: 5
